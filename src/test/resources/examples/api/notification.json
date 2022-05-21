@@ -1,0 +1,13 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/api/Notification"
+  ],
+  "https://onerecord.iata.org/api/Notification#eventType": "OBJECT_CREATED",
+  "https://onerecord.iata.org/api/Notification#logisticsObject": {
+    "@type": [
+      "https://onerecord.iata.org/cargo/LogisticsObject"
+    ],
+    "https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier": "http://localhost:8080/companies/iata"
+  },
+  "https://onerecord.iata.org/api/Notification#topic": "https://onerecord.iata.org/cargo/Piece"
+}
