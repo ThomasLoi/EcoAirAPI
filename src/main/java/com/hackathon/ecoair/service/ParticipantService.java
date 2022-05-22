@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.hackathon.ecoair.api.request.ParticipantSearchCriteria;
 import com.hackathon.ecoair.dao.ShipperDao;
-import com.hackathon.ecoair.model.AgentRegistry;
+import com.hackathon.ecoair.model.ShipperRegistry;
 
 @Service
 public class ParticipantService {
     @Autowired
     private ShipperDao shipperDao;
     
-    public List<AgentRegistry> getShipper(ParticipantSearchCriteria participantSearchCriteria)
+    public List<ShipperRegistry> getShipper(ParticipantSearchCriteria participantSearchCriteria)
     {
         return shipperDao.queryShipper(participantSearchCriteria);
     }

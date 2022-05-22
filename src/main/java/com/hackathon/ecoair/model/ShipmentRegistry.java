@@ -11,23 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Relation(collectionRelation = "shipper")
-public class ShipperRegistry {
-	@JsonProperty("shipperId")
-	private int shipperId;
+@Relation(collectionRelation = "participant.properties.https://onerecord-DOTiata-DOTorg/Participant#participant")
+public class ShipmentRegistry {
+	@JsonProperty("shipmentId")
+	private int shipmentId;
 	
-	@JsonProperty("code")
-	private String code;
+	@JsonProperty("type")
+	private String type;
 	
 	@JsonProperty("name")
 	private String name;
-	
-	@JsonProperty("emission")
-	private int emission;
-	
-	@JsonProperty("donations")
-	private double donations;
-	
-	@JsonProperty("loyaltyPoints")
-	private String loyaltyPoints;
 }
