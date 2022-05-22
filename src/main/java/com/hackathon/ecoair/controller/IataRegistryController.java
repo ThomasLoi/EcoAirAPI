@@ -35,13 +35,13 @@ public class IataRegistryController {
     ParticipantService participantService;
     @Autowired
     ShipperRepository shipperRepository;
-	@PostMapping("/addAgent")
+	@PostMapping("/Agents")
 	  public ResponseEntity<Void> addAgent(@RequestBody AgentRegistry agentRegistry) {
 		participantRepository.save(agentRegistry);
 	    return new ResponseEntity<>(HttpStatus.OK);
 	  }
 	@GetMapping(
-			value = "/agent",
+			value = "/agents",
 			produces = { HAL_JSON_VALUE }
 		)
 		public ResponseEntity<List<AgentRegistry>> getAgentList(
@@ -49,7 +49,7 @@ public class IataRegistryController {
 		return new ResponseEntity<>(participantRepository.findAll(), HttpStatus.OK);
 	}
 	@GetMapping(
-			value = "/agent/{agentId}",
+			value = "/agents/{agentId}",
 			produces = { HAL_JSON_VALUE }
 			)
 	public Optional<AgentRegistry> getAgentDetails(
@@ -57,7 +57,7 @@ public class IataRegistryController {
 		return participantRepository.findByAgentId(agentId);
 	}
 
-	@GetMapping(value = "/shipper", produces = { HAL_JSON_VALUE })
+	@GetMapping(value = "/shippers", produces = { HAL_JSON_VALUE })
 	public ResponseEntity<List<AgentRegistry>> getShipperList(
 			@ParameterObject ParticipantSearchCriteria participantSearchCriteria) {
 		return new ResponseEntity<>(participantService.getShipper(participantSearchCriteria), HttpStatus.OK);
@@ -71,13 +71,13 @@ public class IataRegistryController {
 //		return shipperRepository.findByShipperId(shipperId);
 //	}
 	
-	@PostMapping("/addAirline")
+	@PostMapping("/addAirlines")
 	public ResponseEntity<Void> addAirline(@RequestBody AirlineRegistry airlineRegistry) {
 		airlineRepository.save(airlineRegistry);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@GetMapping(
-			value = "/airline",
+			value = "/airlines",
 			produces = { HAL_JSON_VALUE }
 			)
 	public ResponseEntity<List<AirlineRegistry>> getAirlineList(
@@ -85,7 +85,7 @@ public class IataRegistryController {
 		return new ResponseEntity<>(airlineRepository.findAll(), HttpStatus.OK);
 	}
 	@GetMapping(
-			value = "/airline/{airlineId}",
+			value = "/airlines/{airlineId}",
 			produces = { HAL_JSON_VALUE }
 			)
 	public Optional<AirlineRegistry> getAirlineDetails(
