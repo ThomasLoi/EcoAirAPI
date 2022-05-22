@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springdoc.api.annotations.ParameterObject;
 
+import com.hackathon.ecoair.api.request.ParticipantSearchCriteria;
 import com.hackathon.ecoair.model.AgentRegistry;
 import com.hackathon.ecoair.model.AirlineRegistry;
+import com.hackathon.ecoair.model.ShipperRegistry;
 import com.hackathon.ecoair.repository.AirlineRepository;
 import com.hackathon.ecoair.repository.ParticipantRepository;
+import com.hackathon.ecoair.repository.ShipperRepository;
+import com.hackathon.ecoair.service.ParticipantService;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +32,10 @@ public class IataRegistryController {
 	private ParticipantRepository participantRepository;
 	@Autowired
 	private AirlineRepository airlineRepository;
+    @Autowired
+    ParticipantService participantService;
+    @Autowired
+    ShipperRepository shipperRepository;
 	@PostMapping("/addAgent")
 	  public ResponseEntity<Void> addAgent(@RequestBody AgentRegistry agentRegistry) {
 		participantRepository.save(agentRegistry);
@@ -48,6 +57,20 @@ public class IataRegistryController {
 			@PathVariable int agentId){
 		return participantRepository.findByAgentId(agentId);
 	}
+
+	@GetMapping(value = "/shipper", produces = { HAL_JSON_VALUE })
+	public ResponseEntity<List<ShipperRegistry>> getShipperList(
+			@ParameterObject ParticipantSearchCriteria participantSearchCriteria) {
+		return new ResponseEntity<>(participantService.getShipper(participantSearchCriteria), HttpStatus.OK);
+	}
+//	@GetMapping(
+//			value = "/shipper/{shipperId}",
+//			produces = { HAL_JSON_VALUE }
+//			)
+//	public Optional<ShipperRegistry> getShipperDetails(
+//			@PathVariable int shipperId){
+//		return shipperRepository.findByShipperId(shipperId);
+//	}
 	
 	@PostMapping("/addAirline")
 	public ResponseEntity<Void> addAirline(@RequestBody AirlineRegistry airlineRegistry) {
