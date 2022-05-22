@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import com.hackathon.ecoair.api.request.ParticipantSearchCriteria;
-import com.hackathon.ecoair.model.ShipperRegistry;
+import com.hackathon.ecoair.model.AgentRegistry;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,19 +23,19 @@ public class ShipperDao {
     @Autowired
     private MongoTemplate mongoTemplate;
     
-    public List<ShipperRegistry> queryShipper(ParticipantSearchCriteria searchCriteria){
+    public List<AgentRegistry> queryShipper(ParticipantSearchCriteria searchCriteria){
 
         List<Criteria> criteriaList = new ArrayList<>();
         if(searchCriteria.getType()!= null)
-            criteriaList.add(Criteria.where("participant.properties.https://onerecord-DOTiata-DOTorg/Participant#participantType").is(searchCriteria.getType()));        
-        if(searchCriteria.getId()!= null)
-        	criteriaList.add(Criteria.where("participant.properties.https://onerecord-DOTiata-DOTorg/Participant#participantId").is(searchCriteria.getId()) );
+            criteriaList.add(Criteria.where("agentId").is(searchCriteria.getType()));        
+//        if(searchCriteria.getId()!= null)
+//        	criteriaList.add(Criteria.where("code").is(searchCriteria.getId()) );
 
-        MatchOperation matchOperation = Aggregation.match(new Criteria().andOperator(criteriaList.toArray(new Criteria[criteriaList.size()])));
-        ProjectionOperation projectStage = Aggregation.project("participant.properties.https://onerecord-DOTiata-DOTorg/Participant#participantId","participant.properties.https://onerecord-DOTiata-DOTorg/Participant#participantName","co2Emissions.calculatedEmissions.value","compensation.value","properties.https://onerecord-DOTiata-DOTorg/Shipment#recommendedLoyaltyPoint");        
+        MatchOperation matchOperation = Aggregation.match(criteriaList.get(0));
+        ProjectionOperation projectStage = Aggregation.project("agentId","code","name","emission","cargonCompensation","donations","badges");        
 
         Aggregation aggregation = Aggregation.newAggregation(matchOperation,projectStage);
-        AggregationResults<ShipperRegistry> result = mongoTemplate.aggregate(aggregation, "logisticsObject" , ShipperRegistry.class);
+        AggregationResults<AgentRegistry> result = mongoTemplate.aggregate(aggregation, "agentRegistry" , AgentRegistry.class);
         return result.getMappedResults();
     }
 }

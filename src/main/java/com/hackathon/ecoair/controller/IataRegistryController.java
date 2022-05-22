@@ -15,7 +15,6 @@ import org.springdoc.api.annotations.ParameterObject;
 import com.hackathon.ecoair.api.request.ParticipantSearchCriteria;
 import com.hackathon.ecoair.model.AgentRegistry;
 import com.hackathon.ecoair.model.AirlineRegistry;
-import com.hackathon.ecoair.model.ShipperRegistry;
 import com.hackathon.ecoair.repository.AirlineRepository;
 import com.hackathon.ecoair.repository.ParticipantRepository;
 import com.hackathon.ecoair.repository.ShipperRepository;
@@ -59,7 +58,7 @@ public class IataRegistryController {
 	}
 
 	@GetMapping(value = "/shipper", produces = { HAL_JSON_VALUE })
-	public ResponseEntity<List<ShipperRegistry>> getShipperList(
+	public ResponseEntity<List<AgentRegistry>> getShipperList(
 			@ParameterObject ParticipantSearchCriteria participantSearchCriteria) {
 		return new ResponseEntity<>(participantService.getShipper(participantSearchCriteria), HttpStatus.OK);
 	}

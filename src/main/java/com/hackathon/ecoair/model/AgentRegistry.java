@@ -31,6 +31,6 @@ public class AgentRegistry {
 	@JsonProperty("donations")
 	private double donations;
 	
-	@JsonProperty("loyaltyPoints")
-	private String loyaltyPoints;
+	@JsonProperty("badges")
+	private String badges;
 }
