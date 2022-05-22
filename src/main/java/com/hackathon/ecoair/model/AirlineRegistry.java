@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Relation(collectionRelation = "agent")
-public class AgentRegistry {
-	@JsonProperty("agentId")
-	private int agentId;
+@Relation(collectionRelation = "airline")
+public class AirlineRegistry {
+	@JsonProperty("airlineId")
+	private int airlineId;
 	
 	@JsonProperty("code")
 	private String code;
@@ -31,6 +31,6 @@ public class AgentRegistry {
 	@JsonProperty("donations")
 	private double donations;
 	
-	@JsonProperty("loyaltyPoints")
-	private String loyaltyPoints;
+	@JsonProperty("badges")
+	private String badges;
 }
