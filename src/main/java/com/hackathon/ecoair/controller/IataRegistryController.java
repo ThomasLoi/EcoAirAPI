@@ -37,10 +37,6 @@ public class IataRegistryController {
 		)
 		public ResponseEntity<List<AgentRegistry>> getAgentList(
 			HttpServletRequest request){
-		List<AgentRegistry> agentRegistryList = new ArrayList<>();
-		agentRegistryList.add(new AgentRegistry(0,"9283048SG","Dash Air Cargo Freighter",38,15,2500.0,"GSG"));
-		agentRegistryList.add(new AgentRegistry(1,"9283049SG","Omni Logistic",41,12,1850.0,"GS"));
-		
 		return new ResponseEntity<>(participantRepository.findAll(), HttpStatus.OK);
 	}
 	@GetMapping(
